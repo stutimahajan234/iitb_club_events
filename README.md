@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# IITB Club Events Web App
+This is a React-based web application where IITB students can browse and register for club events using ITC SSO authentication.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+- IITB SSO Login
+- Fetch user details (name, roll number, department, degree)
+- Monthly event calendar
+- Event details on click
+- Event registration
+- My Schedule view
+- Prevent duplicate registrations
+- 1-hour session handling using localStorage
 
-## Available Scripts
+## Tech Stack
+- React.js
+- FullCalendar
+- JavaScript
+- HTML/CSS
+- ITC SSO API
 
-In the project directory, you can run:
+## Key Functions
 
-### `npm start`
+### login()
+Redirects the user to the IITB SSO authentication page using the project ID.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### fetchUser(accessid)
+Fetches authenticated user details from the ITC SSO API using the access ID returned after login. The user data is then stored in React state and saved in localStorage for session management.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### logout()
+Logs the user out by clearing user data from React and removing session information stored in localStorage.
 
-### `npm test`
+### handleEventClick(info)
+Triggered when a user clicks an event in the calendar. It finds the corresponding event from the events list and displays its details.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### handleRegister()
+Registers the logged-in user for the selected event. It checks for duplicate registrations before adding the event to the user's schedule.
 
-### `npm run build`
+### useEffect()
+Handles login session logic when the app loads. It checks for the SSO access ID in the URL, fetches user data if present, and restores the session from localStorage if it hasn't expired.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Setup Instructions
+1. Clone the repository
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+git clone https://github.com/stutimahajan234/iitb_club_events.git
+```
 
-### `npm run eject`
+2. Navigate to the project folder
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+cd iitb_club_events
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Install dependencies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. Start the development server
 
-## Learn More
+```
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The application will run on:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+http://localhost:3000
+```
 
-### Code Splitting
+## SSO Integration
+The application integrates IITB SSO using:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+https://sso.tech-iitb.org/project/{PROJECT_ID}/ssocall/
+```
 
-### Analyzing the Bundle Size
+After login, an `accessid` is returned which is used to fetch user data from:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+https://sso.tech-iitb.org/project/getuserdata
+```
 
-### Making a Progressive Web App
+User session data is stored in `localStorage` and expires after 1 hour.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
