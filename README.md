@@ -85,3 +85,7 @@ https://sso.tech-iitb.org/project/getuserdata
 
 User session data is stored in `localStorage` and expires after 1 hour.
 
+## Notes
+- Event data is currently hardcoded for demonstration purposes; a production version would 
+  fetch events from a backend/database.
+
